@@ -1,0 +1,84 @@
+---
+title: |
+  | Extracting Simulations Elements by Reading from Project Snapshot 
+author: "By: Ghazal Montaseri"
+date: '`r format(Sys.Date(), "%B %d, %Y")`'
+output: pdf_document
+---
+
+```{r add librraries and setup for knitr, include=FALSE}
+rm(list=ls(all=TRUE))
+
+library(ggplot2)
+library(dplyr)
+library(knitr)
+library(stringr)
+library(survival)
+library(purrr)
+library(parallel)
+library(grid)
+library(scales)
+library(jsonlite)
+library(MASS)
+library(plyr)
+library(readr)
+library(RColorBrewer)
+library(reshape2)
+library(readxl) 
+library(knitr)
+library(ospsuite)
+library(tinytex)
+#install.packages("knitr")
+library(knitr)
+#install.packages("tinytex")
+#tinytex::install_tinytex(force = TRUE)
+
+
+library(R6)
+library(pander)
+library(patchwork) 
+
+library(styler)
+
+library(ospsuite)
+library(rClr)
+library(tlf)
+library(ospsuite.utils)
+ 
+library(ospsuite.reportingengine)
+
+summarise = dplyr::summarise 
+filter    = dplyr::filter
+select    = dplyr::select
+
+
+```
+
+
+
+```{r  set the path, echo=FALSE}
+# Path to files and PK-Sim simulation
+
+projDir  = 'C:/...' # where you want to work
+scrDir   = projDir  # where you saved your R script
+JsonDir  = projDir  # where you saved your Json file
+
+
+
+
+```
+
+```{r plot outputs , echo=FALSE, include= FALSE, message=FALSE, warning=FALSE}
+setwd(projDir)
+M  = getwd() # set working directory to the folder where this script exists
+ 
+setwd(paste0(M, '/Evaluation')) # it should be where we have the main folder which contains 'Input' folder in
+ 
+qualificationRunnerFolder = paste0(M, '/Evaluation/QualificationRunner')
+pkSimPortableFolder = paste0(M, '/Evaluation/PK-Sim')
+
+source("workflow.R", encoding="UTF-8")
+createQualificationReport(qualificationRunnerFolder, pkSimPortableFolder)
+ 
+
+```
